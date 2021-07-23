@@ -1,0 +1,10 @@
+#array {
+  display: flex;
+}
+
+.el {
+  margin: 1px;
+  width: 15px;
+  text-align: center;
+  background: #ccc;
+}
