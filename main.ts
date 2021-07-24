@@ -45,7 +45,21 @@ function bubbleSort(array: number[]) {
   } 
 }
 
-function formArray(mode?: string) {
+function insertionSort(array: number[]) {
+  for(let i = 1; i < array.length; i++) {
+    let j = i;
+    while(j > 0 && (array[j] < array[j - 1] )) {
+      const temp = array[j - 1];
+      array[j - 1] = array[j];
+      array[j] = temp;
+
+      j--;
+      snap(array);
+    }
+  }
+}
+
+function formArray(mode: string) {
   let array: number[] = [...Array(9).keys()];
   let str = "";
   array = shuffle(array);
@@ -57,8 +71,14 @@ function formArray(mode?: string) {
     str += `<div class="el" style="background: ${spectrum[element]};">${element}</div>\n`;
   })
   arrayDiv.innerHTML = str; 
-
-  bubbleSort(array);
+  
+  if(mode === "bubble") {
+    bubbleSort(array);
+  } else if (mode === "insertion"){
+    insertionSort(array);
+  } else {
+    return; 
+  }
 }
 
 function shuffle(array: number[]) {
@@ -76,5 +96,6 @@ function shuffle(array: number[]) {
 
 function sort() {
   const sortSelect = document.getElementById('sorts') as HTMLSelectElement;
-  formArray();
+  const sortType = sortSelect.value;
+  formArray(sortType);
 }
