@@ -11,28 +11,37 @@ const spectrum = [
 ];
 
 const sorts = document.getElementById("sorts");
+const arrayDiv = document.getElementById('array') as HTMLDivElement;
 
 const elementClass = document.getElementsByClassName(
   "el"
 ) as HTMLCollectionOf<HTMLDivElement>;
 
-const el = Array.from(elementClass);
-
 let array: number[] = [];
 
 function formArray(upperBound: number, lowerBound: number) {
+  let str = "";
   for (let i = lowerBound; i < upperBound; i++) {
     array.push(i);
   }
+  array = shuffle(array);
+
+  arrayDiv.innerHTML = str;
 }
 
-function snap() {
-  el.forEach((element) => {
-    let spectrumIndex: number = (+element.textContent! - 1) | 0;
-    element.style.backgroundColor = spectrum[spectrumIndex];
-  });
+function shuffle(array: number[]) {
+  let currentIndex = array.length,  randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
 }
 
 function sort() {
-  formArray(1, 10);
+  formArray(10, 1);
 }
