@@ -10,7 +10,7 @@ const spectrum = [
   "#FF0000",
 ];
 
-const body = document.body;
+const visual = document.getElementById('visual') as HTMLDivElement;
 const sorts = document.getElementById("sorts");
 
 const elementClass = document.getElementsByClassName(
@@ -21,6 +21,15 @@ const elementClass = document.getElementsByClassName(
 function snap(arr: number[]): void {
   const arrayDiv = document.createElement('div');
   arrayDiv.classList.add('array');
+  visual.appendChild(arrayDiv);
+
+  arr.forEach(el => {
+    let element = document.createElement('div');
+    element.textContent = `${el}`;
+    element.classList.add('el');
+    element.style.backgroundColor = spectrum[el];
+    arrayDiv.appendChild(element);
+  })
 }
 
 function bubbleSort(array: number[]) {
@@ -36,10 +45,11 @@ function bubbleSort(array: number[]) {
   } 
 }
 
-function formArray() {
+function formArray(mode?: string) {
   let array: number[] = [...Array(9).keys()];
   let str = "";
   array = shuffle(array);
+  visual.innerHTML = "";
 
   const arrayDiv =  document.querySelector('.array') as HTMLDivElement;
   
@@ -47,6 +57,8 @@ function formArray() {
     str += `<div class="el" style="background: ${spectrum[element]};">${element}</div>\n`;
   })
   arrayDiv.innerHTML = str; 
+
+  bubbleSort(array);
 }
 
 function shuffle(array: number[]) {
@@ -63,8 +75,6 @@ function shuffle(array: number[]) {
 }
 
 function sort() {
-  formArray();
-
   const sortSelect = document.getElementById('sorts') as HTMLSelectElement;
-  const 
+  formArray();
 }
