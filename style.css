@@ -5,4 +5,13 @@
 .el {
   width: 20px;
   text-align: center;
+  color: white;
+}
+
+form {
+  display: flex;
+  margin-bottom: 1rem;
+}
+form > input {
+  margin-right: 1rem;
 }
