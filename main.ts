@@ -10,23 +10,29 @@ const spectrum = [
   "#FF0000",
 ];
 
+const body = document.body;
 const sorts = document.getElementById("sorts");
-const arrayDiv = document.getElementById('array') as HTMLDivElement;
 
 const elementClass = document.getElementsByClassName(
   "el"
 ) as HTMLCollectionOf<HTMLDivElement>;
 
-let array: number[] = [];
 
-function formArray(upperBound: number, lowerBound: number) {
+function snap(arr: number[]): void {
+
+}
+
+function formArray() {
+  let array: number[] = [...Array(9).keys()];
   let str = "";
-  for (let i = lowerBound; i < upperBound; i++) {
-    array.push(i);
-  }
   array = shuffle(array);
 
-  arrayDiv.innerHTML = str;
+  const arrayDiv =  document.querySelector('.array') as HTMLDivElement;
+  
+  array.forEach(element => {
+    str += `<div class="el" style="background: ${spectrum[element]};">${element}</div>\n`;
+  })
+  arrayDiv.innerHTML = str; 
 }
 
 function shuffle(array: number[]) {
@@ -43,5 +49,5 @@ function shuffle(array: number[]) {
 }
 
 function sort() {
-  formArray(10, 1);
+  formArray();
 }
